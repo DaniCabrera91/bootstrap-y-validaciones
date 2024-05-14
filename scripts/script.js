@@ -27,7 +27,7 @@ if(!localStorage.userList){
 function saveDataStorage(event){
     event.preventDefault()
 
-    let guardarLista = JSON.parse(localStorage.userList)
+    let guardarLista = JSON.parse((localStorage.userList) || []) 
     guardarLista.push({
         userName: userName.value,
         userEmail: userEmail.value,
@@ -37,8 +37,6 @@ function saveDataStorage(event){
         'userList', 
         JSON.stringify(guardarLista)
     )
-    
-    
 
     // Validaciones de datos:
     if (userName.value === '' || userEmail.value === '' || userPass.value === '' || userPassRep.value === '' ) {
