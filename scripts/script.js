@@ -27,16 +27,7 @@ if(!localStorage.userList){
 function saveDataStorage(event){
     event.preventDefault()
 
-    let guardarLista = JSON.parse((localStorage.userList) || []) 
-    guardarLista.push({
-        userName: userName.value,
-        userEmail: userEmail.value,
-        userPass: userPass.value,
-    })
-    localStorage.setItem(
-        'userList', 
-        JSON.stringify(guardarLista)
-    )
+    let guardarLista = JSON.parse((localStorage.userList) || [])    
 
     // Validaciones de datos:
     if (userName.value === '' || userEmail.value === '' || userPass.value === '' || userPassRep.value === '' ) {
@@ -57,9 +48,18 @@ function saveDataStorage(event){
       userPassRep.value = "";
       return alert("Las contraseñas no coinciden", "danger");
     }
-    userValidation()
+    userValidation(guardarLista)
   } 
-function userValidation() {
+function userValidation(guardarLista) {
+  guardarLista.push({
+    userName: userName.value,
+    userEmail: userEmail.value,
+    userPass: userPass.value,
+})
+  localStorage.setItem(
+    'userList', 
+    JSON.stringify(guardarLista)
+)
   alert("Usuario Creado correctamente", "success");
   setTimeout(() => {
     window.location = './pages/usuarios.html'
